@@ -2,15 +2,10 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
-// import List from "./pages/list/List";
 import Single from "./pages/single/Single";
-// import New from "./pages/new/New";
 import { AuthContext } from "./components/context/AuthContext";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-// import { productInputs /*, userInputs*/ } from "./formSource";
-// import { RoomColumns, /*hotelColumns,  userColumns*/ } from "./datatablesource";
-// import NewHotel from "./pages/newHotel/NewHotel";
 import Talents from "./pages/talents/Talents";
 import Presentaion from "./pages/presentation/Presentaion";
 import PublicPresentation from "./pages/singlePresentation/PublicPresentation"
