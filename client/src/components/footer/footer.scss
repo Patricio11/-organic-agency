@@ -1,0 +1,35 @@
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em 0;
+    gap: 15px;
+    margin-top: 3em;
+    flex-direction: column;
+
+    .ftop{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        .fIcon{
+            text-decoration: none;
+            color: #808080;
+            svg{
+    
+                padding: .3em;
+                font-size: 1.8em;
+                color: #808080;
+                border: 1px solid;
+                box-shadow: 5px 2px 5px 0 rgb(225 225 225 / 16%);;
+                cursor: pointer;
+    
+                &:hover{
+                    border: 1px solid #fff;
+                }
+            }
+        }
+    }
+}

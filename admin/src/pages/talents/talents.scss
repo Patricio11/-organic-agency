@@ -1,0 +1,15 @@
+.talents{
+    display: flex;
+    height: 100%;
+    .talentWapper{
+        flex: 6;
+
+        .talentsContainer{
+
+
+            .list{
+                padding: 1.5em;
+            }
+        }
+    }
+}

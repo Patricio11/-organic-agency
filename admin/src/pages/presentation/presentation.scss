@@ -1,0 +1,15 @@
+.presentaion{
+    display: flex;
+    height: 100%;
+    
+    .presentaionWapper{
+        flex: 6;
+
+        .presentaionContainer{
+            
+            .list{
+                padding: 1.5em;
+            }
+        }
+    }
+}

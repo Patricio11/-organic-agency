@@ -1,0 +1,80 @@
+$slideImgMainPath : "../../images/home";
+@mixin animate($animation,$duration,$method){
+    animation: $animation $duration $method;
+}
+@mixin animates($animation,$duration){
+    animation: $animation $duration ;
+}
+@mixin keyframes($name){
+    @keyframes #{$name}{
+        @content;
+    }
+}
+.slider{
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    // animation: slide 40s infinite; //the slide animation will be created with @keyfram
+
+    .load{
+        // animation: slide 2s;
+        @include animates(slide, 2s);
+    }
+
+    .overlay{
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.5);
+        position: absolute;
+        z-index: 9;
+    }
+    
+
+    @include keyframes(slide){
+        0%{
+            background-image: url(#{$slideImgMainPath}/image1.jpg);
+            opacity: 1;
+        }
+        20%{
+            background-image: url(#{$slideImgMainPath}/image1.jpg);
+            opacity: 1;
+        }
+        // 20.01%{
+        //     background-image: url(#{$slideImgMainPath}/image2.jpg);
+        //     opacity: 0.5;
+        // }
+        40%{
+            background-image: url(#{$slideImgMainPath}/image2.jpg);
+            opacity: 1;
+        }
+        // 40.01%{
+        //     background-image: url(#{$slideImgMainPath}/image3.jpg);
+        //     opacity: 0.5;
+        // }
+        60%{
+            background-image: url(#{$slideImgMainPath}/image3.jpg);
+            opacity: 1;
+        }
+        // 60.01%{
+        //     background-image: url(#{$slideImgMainPath}/image4.jpg);
+        //     opacity: 0.5;
+        // }
+        80%{
+            background-image: url(#{$slideImgMainPath}/image4.jpg);
+            opacity: 1;
+        }
+        // 80.01%{
+        //     background-image: url(#{$slideImgMainPath}/image5.jpg);
+        //     opacity: 0.5;
+        // }
+        100%{
+            background-image: url(#{$slideImgMainPath}/image5.jpg);
+            opacity: 1;
+        }
+       
+      }
+    @include animate(slide, 30s, infinite);
+}
+

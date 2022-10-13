@@ -1,0 +1,366 @@
+.single{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    
+    .singleContainer{
+        flex: 6;
+
+        
+        .mainModal{
+            position: fixed;
+            display: flex;
+            // width: 50%;
+            top: 0;
+            right: 0;
+            z-index: 10;
+            background-color: #fff;
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    
+            .modalWrapper{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                padding: 1.5em;
+    
+                .topModal{
+                    display: flex;
+                    justify-content: space-between;
+    
+                    .closeIcon{
+                        cursor: pointer;
+                    }
+                }
+    
+                .modalBody{
+                    
+                    form.uploadMediaForm{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1em;
+                        color: #333333;
+                        justify-content: center;
+                    }
+                    form{
+                        
+                        display: flex;
+                        gap: 1em;
+                        color: #333333;
+
+                        .formFields{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 1em;
+    
+                            flex: 2;
+    
+                            .fieldsContainer{
+                                display: flex;
+                                justify-content: space-between;
+                                gap: 15px;
+    
+                                .fieldItem{
+                                    display: flex;
+                                    flex-direction: column;
+                                    width: 50%;
+                                    label{
+
+                                        small {
+                                            color: #C1C1C1;
+                                            font-size: 12px;
+                                        }
+                                    }
+                                    input, select {
+                                        // padding: 0.5em;
+                                        // height: 40px;
+                                        // border: 1px solid #333333;
+                                        padding: 0.4em 1em;
+                                        height: 40px;
+                                        font-size: 1em;
+                                        border: 1px solid rgba(155,155,155,.55);
+                                        outline: none;
+                                    }
+                                    input[type=date],select{
+                                        cursor: pointer;
+                                    }
+                                }
+    
+                                
+                            }
+    
+                            .fieldsCheckContainer {
+                                width: 100%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                justify-content: space-between;
+    
+                                .fieldCheckItem{
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 4px;
+                                    font-size: 15px;
+    
+                                    // input{
+                                    //     transform: scale(1.5);
+                                    // }
+                                }
+                            }
+    
+                            .fieldItem {
+                                display: flex;
+                                flex-direction: column;
+    
+                                select{
+                                    // height: 40px;
+                                    // padding: 0.5em;
+                                    // border: 1px solid #333333;
+    
+                                    padding: 0.4em 1em;
+                                    height: 40px;
+                                    font-size: 1em;
+                                    border: 1px solid rgba(155,155,155,.55);
+                                    cursor: pointer;
+                                    outline: none;
+                                }
+                            }
+                            
+                            .createBtnContainer{
+        
+                                .createBtn{
+                                    width: 50%;
+                                    font-size: 1em;
+                                    display: flex;
+                                    height: 48px;
+                                    justify-content: center;
+                                    align-items: center;
+                                    background-color: #7451f8;
+                                    color: #fff;
+                                    border: none;
+                                    gap: 10px;
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+                }
+    
+            }
+        }
+        .uploadTalentMediaModal{
+            .modalWrapper{
+
+                .modalBody{
+                    height: 250px;
+                }
+            }
+        }
+        // .updateTalentModal{
+
+        // }
+
+        .top{
+            display: flex;
+            padding: 20px;
+            gap: 1rem;
+            
+            .mainCenter{
+                flex: 1;
+                padding: 20px;
+                -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+                box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+                // border-radius: 10px;
+                position: relative;
+                &.mainTop{
+                    padding-bottom: 0;
+
+                    .actionTabs {
+                        display: flex;
+                        margin-top: 2em;
+                        gap: 0.5em;
+
+                        .actionTabitem{
+                            text-decoration: none;
+                            color: #4a4a4a;
+                            display: block;
+                            padding: 22px 20px 13px;
+                            font-weight: 500;
+                            font-size: 16px;
+                            align-items: center;
+
+                            &:active, &:hover, &:focus, &.active{
+                                border-bottom: 1px solid #67a868;
+                                color: #67a868;
+                            }
+                        }
+                    }
+                }
+                .editBtn{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: 5px 10px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #7451f8;
+                    background-color: #7551f818;
+                    // border-top-right-radius: 10px;
+                    cursor: pointer;
+
+                }
+                
+                .item{
+                    display: flex;
+                    gap: 20px;
+                    // width: 20%;
+                    .left{
+                        flex: 2;
+                        display: flex;
+                        gap: 15px;
+                        .imgContainer{
+                            width: 30%;
+                            height: 350px;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                        // .itemImg{
+                        //     width: 100%;
+                        //     min-height: 20rem;
+                        //     // border-radius: 10px;
+                        //     object-fit: cover;
+                        //    flex: 1;
+                        // }
+    
+                        .details{
+                            width: 100%;
+                            flex: 8;
+                            position: relative;
+                            .talentName{
+                                margin-bottom: 10px;
+                                color: #555;
+                                margin-right: 10px;
+                                font-size: 20px;
+                            }
+                            .detailsItem{
+                                // margin-bottom: 10px;
+                                // font-size: 14px;
+                                // display: flex;
+                                // flex-direction:column;
+                                margin-bottom: 10px;
+                                font-size: 16px;
+                                display: flex;
+                                align-items: center;
+                                // align-items: center;
+                                gap: 15px;
+                                &.socialContainer{
+                                    margin-top: 20px;
+                                }
+                                .itemKey{
+                                    font-weight: bold;
+                                    color: gray;
+                                    
+                                }
+                                .itemValue{
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    font-weight: 300;
+    
+                                    svg{
+                                        // color: #5F6368;
+                                        color: #4a4a4a;
+                                    }
+                                    .socialIcon{
+                                        font-size: 2em;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .right{
+                        position: relative;
+                        flex: 0.8;
+                        overflow-y: auto;
+                        .singleJobHistoryContainer{
+                            display: flex;
+                            flex-direction: column;
+                            padding-left: 10px;
+                            margin-bottom: 10px;
+                            border-left: 4px solid #FFC867;
+
+                            .jobHtitle{
+                                display: flex;
+                                font-weight: 700;
+                                justify-content: space-between;
+
+                                .jobHistoryActions{
+                                    display: flex;
+                                    gap: 10px;
+                                    .deleteJobHistoryIcon{
+                                        color: #CC232A;
+                                        cursor: pointer;
+                                    }
+                                }
+
+                            }
+
+                            .jobHDetails{
+                                display: flex;
+                                flex-direction: column;
+
+                                .jobTop{
+                                    display: flex;
+                                    padding: 0.5em;
+                                    gap: 5px;
+                                    color: #37373D;
+                                    justify-content: space-between;
+                                    
+                                }
+                                span{
+                                    text-align: center;
+                                    display: flex;
+                                    flex-direction: column;
+                                    .jbInfo{
+                                        color: #c1c1c1c1;
+                                    }
+                                }
+                                .jobBottom {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    padding:0 0.5em;
+                                    gap: 5px;
+                                    color: #37373D;
+
+                                    span{
+
+                                        span.jbInfoTerritories {
+                                            width: max-content;
+                                            flex-direction: row;
+                                            gap: 5px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .right{
+                flex: 2;
+                // height: 100hv;
+            }
+        }
+    }
+    .tile{
+        font-size: 16px;
+        color: lightgray;
+        margin-bottom: 20px;
+    }
+}

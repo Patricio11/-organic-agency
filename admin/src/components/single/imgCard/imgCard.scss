@@ -1,0 +1,52 @@
+.imgCardContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 19%;
+    height: 265px;
+
+    .imgCardWrapper{
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        img, video{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .imgActionBtn{
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+
+            
+            .setProfile{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.3em;
+                color: #4A4A4A;
+                background-color: #F2EFFE;
+                cursor: pointer;
+
+                &.active{
+                    color: #fff;
+                    background-color: #7451F8;
+                }
+            }
+            .imgDeleteBtn{
+                
+                padding: 4px;
+                font-size: 1.88em;
+                color: #fff;
+                background-color: rgba(240, 22, 22, 0.745);
+                cursor: pointer;
+
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+.card{
+    // width: 262.5px;
+    width:315.4px;
+    // height: 350px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    // overflow: hidden;
+
+    .cardContainer{
+        height: 26rem;
+        overflow: hidden;
+        cursor: pointer;
+
+        img{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+            
+        }
+
+        &:hover {
+            // position: absolute;
+            // top: -70px;
+            // left: -21px;
+            // height: 550px;
+            // background-color: black;
+            // box-shadow: 0 2px 5px 0 rgb(255 255 255 / 16%), 0 3px 6px 0 rgb(255 255 255 / 20%);
+            // width: 360px;
+            // display: flex;
+            // flex-direction: column;
+            // overflow: unset;
+            // z-index: 3;
+
+            position: absolute;
+            height: 26rem;
+            background-color: black;
+            box-shadow: 0 2px 5px 0 rgb(255 255 255 / 16%), 0 3px 6px 0 rgb(255 255 255 / 20%);
+            width: 315px;
+            display: flex;
+            flex-direction: column;
+            overflow: unset;
+            z-index: 3;
+
+
+            // transition: all .3s ease-in-out;
+            
+            img{
+                height: 140px;
+                display: none;
+            }
+            video{
+                width: 100%;
+                height: 100%;
+                display: block !important;
+                position: absolute;
+                object-fit: cover;
+            }
+            .talentName{
+                display: none;
+            }
+        }
+        .talentName{
+            position: absolute;
+            bottom: 0;
+            text-transform: uppercase;
+            width: 299.4px;
+            color: #fff;
+            z-index: 2;
+            padding-left: 1em;
+            padding-bottom: 0.5em;
+            font-size: 1.3em;
+            font-weight: 300;
+            letter-spacing: 4px;
+            // text-align: center;
+        }
+    }
+}

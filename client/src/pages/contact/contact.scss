@@ -1,0 +1,75 @@
+.contact{
+    width: 100%;
+    display: flex;
+    position: relative;
+    // flex-direction: column;
+    // top: 105px;
+    padding-top: 10em;
+
+    .cWrapper{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 0px var(--main-padding-lr);
+
+        .cContainer{
+            display: flex;
+            gap: 15px;
+
+            .cLeft{
+                flex: 2;
+                
+                form{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    
+                    .formGroup{
+                        display: flex;
+                        gap: 15px;
+                        width: 100%;
+    
+                        
+                        input, button, textarea{
+                            width: 100%;
+                            padding: 0.7em;
+                            background-color: transparent;
+                            outline: none;
+                            font-size: 1em;
+                            border: 1px solid #000;
+                        }
+                        button{
+                            text-transform: uppercase;
+                            cursor: pointer;
+                            background-color: #000;
+                            color: #fff;
+                            font-weight: 500;
+
+                            &:hover{
+                                background-color: #fff;
+                                color: #000;
+                                transition: all .3s ease-in-out;
+                            }
+                        }
+                    }
+                }
+            }
+            .cRight{
+                flex:1;
+                display: flex;
+                flex-direction: column;
+                gap:5px
+            }
+        }
+
+        .map{
+            width: 100%;
+            margin-top: 5em;
+
+            iframe{
+                width: 100%;
+            }
+        }
+    }
+}

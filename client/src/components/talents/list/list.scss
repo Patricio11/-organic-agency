@@ -1,0 +1,34 @@
+.list{
+    width: 100%;
+    position: relative;
+    // top: 150px;
+
+    .searchTalent {
+        position: absolute;
+        right: 6vw;
+        display: flex;
+        align-items: center;
+        width: 21.5%;
+
+        .searchInput{
+            flex: 9;
+            border: none;
+            border-bottom: 3px solid gray;
+            outline: none;
+        }
+        .sIcon{
+            flex: 1;
+        }
+    }
+
+    .lWrapper{
+        padding: var(--main-padding-tb) var(--main-padding-lr);
+        
+        .lCardContainer{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+    }
+}
