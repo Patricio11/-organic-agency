@@ -15,7 +15,9 @@ const Home = () => {
             <Slider />
             <div className="sContentContainer">
                 <div className="sContent">
-                    <img src={logoTransp} alt="" className="logo" />
+                    <div className="logo">
+                        <img src={logoTransp} alt="" className="logo" />
+                    </div>
                     <div className="sMenuContainer">
                         {
                             menuData.map((menuItem, index) => (
