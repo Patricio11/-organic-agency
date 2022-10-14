@@ -1,6 +1,5 @@
 import "./home.scss";
 import logoTransp from "../../assets/organic-logo-t.png"
-// import logoBw from "../../assets/organic-logo-bw.jpg"
 import Slider from "../../components/slider/Slider";
 import { menuData } from "../../configs/navBarMenu";
 import {Link} from "react-router-dom"
@@ -50,11 +49,9 @@ const Home = () => {
                             <Link to="/contact" className="cIcon">
                                 <PhoneEnabledOutlinedIcon />
                             </Link>
- 
                             <a href="https://www.instagram.com/patriciopcm11" target="_blank" rel="noreferrer" className="cIcon">
                                 <InstagramIcon />
                             </a>
-                            
                         </div>
                     </div>
                 </div>

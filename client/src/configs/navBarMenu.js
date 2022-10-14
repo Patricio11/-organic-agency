@@ -19,9 +19,9 @@ export const menuData = [
         section: 'talents',
         text: 'Influencers'
     },
-    // {
-    //     link: '/talents/all?p=true',
-    //     section: 'talents',
-    //     text: 'Specialities'
-    // },
+    {
+        link: '/talents/all',
+        section: 'talents',
+        text: 'All'
+    },
 ]

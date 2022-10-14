@@ -9,7 +9,7 @@ import { useState } from "react";
 
 
 const NavBar = () =>{
-    // let navigate = useNavigate()
+
     const [phoneMenuOpen, setPhoneMenuOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false);
     
@@ -17,8 +17,6 @@ const NavBar = () =>{
         setIsScrolled(window.pageYOffset === 0 ? false : true);
         return () => window.onscroll = null; // This is a cleanup funstion so it doesn't become a infinite loop
     }
-
-
 
     return (
         <div className={isScrolled ? "navBar scrolled" : "navBar"}>
@@ -71,7 +69,7 @@ const NavBar = () =>{
                             </Link>
 
                             <a 
-                                href="https://www.instagram.com/patriciopcm11" 
+                                href="https://instagram.com/organictalentmanagement?igshid=YmMyMTA2M2Y=" 
                                 target="_blank" 
                                 rel="noreferrer"
                                 className={isScrolled ? "cIcon scrolled" : "cIcon"}

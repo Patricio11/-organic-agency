@@ -220,6 +220,16 @@
 }
 
 @media (max-width:1022px){
+    .navBar {
+        .navContainer{
+            padding: 1.5em;
+            .logo {
+                a {
+                    width: 50%;
+                }
+            }
+        }
+    }
     .nMenuItems{
         flex-direction: column;
         width: 65%;
