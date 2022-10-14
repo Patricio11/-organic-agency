@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const TalentSchema = new mongoose.Schema({
     name:{
         type: String,
-        required: true
+        required: true,
+        
     },
     surname:{
         type: String,

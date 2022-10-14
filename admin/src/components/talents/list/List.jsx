@@ -14,8 +14,11 @@ const List = () => {
     const [seachTalent, setSeachTalent] = useState('')
     const [searchCategory, setSearchCategory] = useState('all')
     // const [talentSGender, settalentSGender] = useState('')
-    const apiImgUrl = "http://localhost:8800" //API main URL
-    const apiUrl = "http://localhost:8800/api" //API main URL
+    const apiImgUrl = process.env.REACT_APP_API_IMG_URL
+    // const apiImgUrl = "http://localhost:8800" //API main URL
+    const apiUrl = process.env.REACT_APP_API_URL //API main URL
+    // const apiUrl = "http://localhost:8800/api" //API main URL
+    
     // const urlParams = new URLSearchParams(window.location.search);
     
     const [getTalents, setGetTalents] = useState([]);
@@ -27,8 +30,11 @@ const List = () => {
     
     
     useEffect(()=>{
+        const axiosInstance = axios.create({
+            baseURL: process.env.REACT_APP_API_URL
+        })
         const fetchTalent = async () =>{
-            const res = await axios.get(`${apiUrl}/admin`);
+            const res = await axiosInstance.get(`/admin`);
             setGetTalents(res.data)
         }
         fetchTalent()
@@ -64,25 +70,15 @@ const List = () => {
         setSeachTalent(e.target.value)
     }
     useEffect(()=>{
-        // setUrlToFetch(`${apiUrl}/admin/talents/search_result?search_category=${searchCategory}&search=${seachTalent}`)
-        // if(!searchCategory) return
-        console.log('In Iitial effect')
-        console.log('In Iitial effect')
-        console.log('seachTalent')
-        console.log(seachTalent)
-        console.log('searchCategory')
-        console.log(searchCategory)
-        console.log(seachTalent==='')
-        
-
 
         const fetchTalent = async () =>{
+            const axiosInstance = axios.create({
+                baseURL: process.env.REACT_APP_API_URL
+            })
             
-            const res = await axios.get(`${apiUrl}/admin/talents/search_result?search_category=${searchCategory}&search=${seachTalent}`);
+            const res = await axiosInstance.get(`/admin/talents/search_result?search_category=${searchCategory}&search=${seachTalent}`);
             setGetTalents(res.data);
-            
-            console.log("Inside fetch UseEffect")
-            console.log(res)
+          
         }
         fetchTalent()
  

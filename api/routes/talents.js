@@ -1,5 +1,5 @@
-import express from "express";
-import { 
+const express = require("express");
+const { 
     createTalent,
     deleteTalent, 
     deleteTalentFiles, 
@@ -19,14 +19,14 @@ import {
     updateTalentJobHistoryDelete, 
     updateTalentSocialMedia, 
     videosFileUpload
-} from "../controllers/talent.js";
+} = require("../controllers/talent.js");
 // import { verifyAdmin, verifyUser } from "../utils/verifyAdmin.js";
 
 
 const router = express.Router();
 
-import multer from "multer"
-import path from "path"//importing to create the path for the files
+const multer = require("multer")
+const path = require("path")//importing to create the path for the files
 
 const talentProfileBasePath = 'uploads/profiles';
 const talentPortfoleoBasePath = 'uploads/portfoleo';

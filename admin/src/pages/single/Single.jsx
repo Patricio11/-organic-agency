@@ -37,23 +37,24 @@ const Single = () => {
     // const [urlToFetch, setUrlToFetch] = useState("");
 
     
-    const apiUrl = "http://localhost:8800/api" //API main URL
-    const apiImgUrl = "http://localhost:8800" //API main URL
+    const apiImgUrl = process.env.REACT_APP_API_IMG_URL
+    // const apiImgUrl = "http://localhost:8800" //API main URL
+    const apiUrl = process.env.REACT_APP_API_URL //API main URL
+    // const apiUrl = "http://localhost:8800/api" //API main URL
     // const {data, loading /*, error*/} = useFetch(
     //     `${apiUrl}/find/${talent_id}`
     // )
-    console.log(talentData)
     useEffect(()=>{
+        const axiosInstance = axios.create({
+            baseURL: process.env.REACT_APP_API_URL
+        })
         const fetchTalent = async () =>{
-            const res = await axios.get(`${apiUrl}/talents/find/${talent_id}`);
+            const res = await axiosInstance.get(`/talents/find/${talent_id}`);
             setTalentData(res.data)
         }
         fetchTalent()
     },[talent_id])
-    console.log(talentData)
 
-
-    
     const [activedTab, setActiveTab] = useState('')
     
     useEffect(() => {
@@ -71,9 +72,7 @@ const Single = () => {
     //UPLOAD 
     const [files, setFiles] = useState("");
 
-    console.log(files);
-    
-    // const [info, setInfo] = useState({})
+
     const handleCloseUploadModal = () => {
         // setInfo({});
         setFiles("");
@@ -84,7 +83,7 @@ const Single = () => {
     const handleDocType = (e)=>{
         setDocumentType(e.target.value)
     }
-    console.log(documentType)
+    
     const handleSaveUploads = async e => {
         e.preventDefault();
         // console.log(hashUrl.split('#'))
@@ -178,10 +177,7 @@ const Single = () => {
         // refresh()
     }
 
-    // let finMedia = talentData.portfoleo?.find(findMedia =>findMedia.isProfile=== true)
-    // console.log("Polaroids")
-    // console.log(talentData)
-    // console.log(talentData.polaroids[0].isProfile)
+    
     
     const handleDeleteMedia = async (mediaName,mediaId)=>{
         console.log("Inside the delete")

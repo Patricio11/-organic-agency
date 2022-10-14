@@ -23,9 +23,19 @@ const Login = () =>{
         e.preventDefault();//To prevent the page from reloading or refresh
         dispatch({type:"LOGIN_START", payload: true});// This just update out Loading state
 
-        const apiUrl = "http://localhost:8800/api" //API main URL
+        
+        // const apiUrl = "http://localhost:8800/api" //API main URL
+
+        // const apiUrl = process.env.REACT_APP_API_URL//API main URL
+        // const apiUrl = "http://localhost:8800/api" //API main URL
+
+        const axiosInstance = axios.create({
+            baseURL: process.env.REACT_APP_API_URL
+        })
+
+
         try {
-            const res = await axios.post(`${apiUrl}/auth/login`, credentials); //passing credentials to login(username password)
+            const res = await axiosInstance.post(`/auth/login`, credentials); //passing credentials to login(username password)
             
             //Check if is admin the user
             if(res.data.isAdmin){
@@ -51,7 +61,7 @@ const Login = () =>{
                 <input type="password" onChange={handleChange} placeholder="Password" id="password" className="lInput" />
                 <button disabled={loading} onClick={handleLogin} className="lButton">Login</button>
                 {error && <span>{error.message}</span>}
-                {loading && <span>"It is Loading"</span>}
+                {/* {loading && <span>"It is Loading"</span>} */}
             </div>
         </div>
     )

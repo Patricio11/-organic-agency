@@ -9,6 +9,7 @@ import { Navigate } from "react-router-dom";
 import Talents from "./pages/talents/Talents";
 import Presentaion from "./pages/presentation/Presentaion";
 import PublicPresentation from "./pages/singlePresentation/PublicPresentation"
+import Register from "./pages/register/Register";
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
           <Route path="/">
             
             <Route path="login" element={ <Login />}></Route>
+            <Route path="register" element={ <Register />}></Route>
             <Route 
               index 
               element={ 

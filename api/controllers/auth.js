@@ -4,7 +4,6 @@ const jwt  = require("jsonwebtoken");
 
 exports.register = async (req, res, next) =>{
     try {
-        
         const saltRounds = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
 
@@ -13,9 +12,8 @@ exports.register = async (req, res, next) =>{
             password:hashedPassword,
         })
 
-
         await newUser.save()
-        res.status(200).send("User has been created.")
+        res.status(200).send("User has been created. go To login")
     } catch (err) {
         next(err);
     }

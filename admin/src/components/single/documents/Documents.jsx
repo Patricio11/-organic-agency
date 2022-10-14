@@ -1,5 +1,5 @@
 import "./documents.scss"
-
+import { RiFilePdfLine } from 'react-icons/ri';
 const Documents = ({documents,baseMediaUrl, setShowUploadModal}) =>{
     return (
         <div className="top documents">
@@ -9,7 +9,20 @@ const Documents = ({documents,baseMediaUrl, setShowUploadModal}) =>{
                 
                 { 
                     documents.map((document, idx) => (
-                        <a href = {baseMediaUrl + document.filename} key={idx} >{document.filename}</a>
+                    
+                        <a 
+                            href = {baseMediaUrl + document.filename} 
+                            key={idx} 
+                            style={{
+                                display:'flex', 
+                                gap:'0.3em', 
+                                alignItems:'center', 
+                                textDecoration:'none'
+                            }}
+                        >
+                            <RiFilePdfLine/>
+                            <span>{document.doc_type}</span>
+                        </a>
                     ))
                 }
             </div>

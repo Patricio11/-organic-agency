@@ -46,7 +46,7 @@ app.use(cors({}))
 const { dirname } =require( 'path');
 const { fileURLToPath } = require( 'url');
 // const __dirname = dirname(fileURLToPath(import.meta.url));
-const __dirname = dirname(fileURLToPath(require('url').pathToFileURL(__filename).toString()));
+// const __dirname = dirname(fileURLToPath(require('url').pathToFileURL(__filename).toString()));
 //End
 
 //Tell express where out public files are going to be
