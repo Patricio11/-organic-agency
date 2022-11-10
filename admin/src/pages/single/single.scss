@@ -43,9 +43,81 @@
                         flex-direction: column;
                         gap: 1em;
                         color: #333333;
-                        justify-content: center;
+                        justify-content: space-between;
+                        
+                        .filesUploadContainer {
+                            display: flex;
+                            justify-content: center;
+                            width: 100%;
+                            height: 40%;
+
+                            label {
+                                width: 100%;
+                                margin: 0 !important;
+                                height: 130px;
+                            }
+                        }
+                        .uploadPreview{
+                            display: flex;
+                            height: 11em;
+                            gap: 0.5em;
+                            flex-wrap: wrap;
+                            overflow-y: auto;
+
+                            .uploadPreview_Item {
+                                width: 23.333%;
+                                min-width: 20%;
+                                // display: flex;
+
+                                img{
+                                    width: 100%;
+                                }
+                                video{
+                                    width: 100%;
+                                }
+                            }
+                        }
+                        .saveUpload{
+                            align-items: center;
+                            background-color: #7451f8;
+                            color: #fff;
+                            display: flex;
+                            gap: 10px;
+                            justify-content: center;
+                            border: none;
+                            padding: 0.7em;
+                            font-weight: 700;
+                            cursor: pointer;
+                        }
                     }
                     form{
+
+                        .selectedProfile {
+                            height: 350px;
+                            width: 20%;
+
+                            img{
+                                bottom: -7px;
+                                //height: 100%;
+                                object-fit: cover;
+                                position: relative;
+                                width: 100%;
+                            }
+
+                            .fileUploadLabel {
+                                align-items: center;
+                                background-color: #7451f8;
+                                color: #fff;
+                                cursor: pointer;
+                                display: flex;
+                                gap: 10px;
+                                height: 48px;
+                                justify-content: center;
+                            }
+                            .updatedProfile {
+                                display: none;
+                            }
+                        }
                         
                         display: flex;
                         gap: 1em;
@@ -152,10 +224,15 @@
             }
         }
         .uploadTalentMediaModal{
+            width: 40%;
+            height: 28em;
             .modalWrapper{
-
+                justify-content: space-between;
                 .modalBody{
-                    height: 250px;
+                    // height: 250px;
+                    height: 100%;
+
+                    
                 }
             }
         }
@@ -222,11 +299,12 @@
                         display: flex;
                         gap: 15px;
                         .imgContainer{
+                            display: flex;
+                            justify-content: center;
                             width: 30%;
-                            height: 350px;
+                            // height: 350px;
                             img{
                                 width: 100%;
-                                height: 100%;
                                 object-fit: cover;
                             }
                         }

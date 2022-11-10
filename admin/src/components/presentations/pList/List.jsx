@@ -14,11 +14,13 @@ const List = () => {
   const [showCreatePresentationModal, setShowCreatePresentationModal] = useState(false)
   const [showPresentationModal, setShowPresentationModal] = useState(false)
   const [selectedPresentation, setSelectedPresentation] = useState('')
-  const [talents, setTalents] = useState([])
-  const apiImgUrl = "http://localhost:8800" //API main URL
-  const apiUrl = "http://localhost:8800/api" //API main URL
-  const baseMediaUrl = `${apiImgUrl}/uploads/presentation/`
   
+  
+  const [talents, setTalents] = useState([])
+  const apiImgUrl = process.env.REACT_APP_API_IMG_URL
+  const apiUrl = process.env.REACT_APP_API_URL //API main URL
+  const baseMediaUrl = `${apiImgUrl}/uploads/presentation/`
+
 
   useEffect(()=>{
     const fetchPresentations = async () =>{
@@ -160,6 +162,7 @@ const List = () => {
             presentation = {selectedPresentation}
             baseMediaUrl = {baseMediaUrl}
             apiImgUrl={apiImgUrl}
+            apiUrl={apiUrl}
             talents={talents}
           />
         }

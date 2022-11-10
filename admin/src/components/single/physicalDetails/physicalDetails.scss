@@ -89,7 +89,10 @@ form{
         }
         
         .createBtnContainer{
-
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            
             .createBtn{
                 width: 50%;
                 font-size: 1em;
@@ -102,6 +105,10 @@ form{
                 border: none;
                 gap: 10px;
                 cursor: pointer;
+            }
+            .sizesUpdated{
+                color: #67a868;
+                font-weight: 600;
             }
         }
     }

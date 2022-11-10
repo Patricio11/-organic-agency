@@ -11,15 +11,14 @@ import Card from '../../talents/card/Card';
 
 
 const SinglePresentation = props => {
-  const apiUrl = "http://localhost:8800/api" //API main URL
-  const urlDomain = "http://localhost:3000"
+  //const apiUrl = process.env.REACT_APP_API_URL //API main URL
+  const apiUrl = props.apiUrl //API main URL
   const apiImgUrl = props.apiImgUrl
+  const urlDomain = 'https://admin.organictalentmanagement.co.za'
   // const roleName=''
   // const date=dayjs(Date.now()).format('MM/DD/YYYY')
 
   const [showAddRoleModal, setShowAddRoleModal] = useState(false)
-  // const [selectedTalent, setSelectedTalent] = useState('')
-  // const [presentationRoles, setPresentationRoles] = useState(props.presentation.roles)
   const [presentation, setPresentation] = useState(props.presentation)
   const [roleToAdd, setRoleToAdd] = useState('')
   const [selectedRole, setSelectedRole] = useState('')
@@ -230,8 +229,6 @@ const SinglePresentation = props => {
                     <span className='roleDate'>{dayjs(role.date).format('MM/DD/YYYY') }</span>
                   </div>
                   <div className="roleAction">
-                    <span className='roleActionBtn' onClick={()=>handleSelectedRole(role)}><RiUserAddLine/> <span>Add Talent</span></span>
-                    <span className='roleActionBtn' onClick={()=>removePresentationRole(role._id)}><RiDeleteBinLine/> <span>Remove Role</span> </span>
                   </div>
                   {/* <span>{role.talents.length}</span> */}
                 </div>
@@ -245,6 +242,7 @@ const SinglePresentation = props => {
                           singleCard={talent} 
                           apiImgUrl={apiImgUrl} 
                           isTalentRole={true} 
+                          publicTalent={true}
                         />
                       </div>
                     ))

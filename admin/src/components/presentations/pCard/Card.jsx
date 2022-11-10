@@ -8,7 +8,8 @@ import axios from 'axios'
 const Card = (props) => {
   // const [presentation, setPresentation] = useState(props.presentation)
   const presentation = props.presentation
-  const apiUrl = "http://localhost:8800/api" //API main URL
+  const apiUrl = process.env.REACT_APP_API_URL //API main URL
+  // const apiUrl = "http://localhost:8800/api" //API main URL
   const handlePresentation = (presentation) =>{
     console.log(presentation)
     props.setSelectedPresentation(presentation)

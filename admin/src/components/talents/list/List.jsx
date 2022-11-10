@@ -1,33 +1,23 @@
-import Card from "../card/Card"
-import "./list.scss"
-import SearchOutlined from "@mui/icons-material/SearchOutlined"
-// import { Link /*, useLocation*/ } from "react-router-dom"
+import Card from "../card/Card";
+import "./list.scss";
+import SearchOutlined from "@mui/icons-material/SearchOutlined";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import CloseIcon from '@mui/icons-material/Close';
-// import useFetch from "../../hooks/useFetch"
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const List = () => {
     const [seachTalent, setSeachTalent] = useState('')
     const [searchCategory, setSearchCategory] = useState('all')
-    // const [talentSGender, settalentSGender] = useState('')
-    const apiImgUrl = process.env.REACT_APP_API_IMG_URL
-    // const apiImgUrl = "http://localhost:8800" //API main URL
-    const apiUrl = process.env.REACT_APP_API_URL //API main URL
-    // const apiUrl = "http://localhost:8800/api" //API main URL
-    
-    // const urlParams = new URLSearchParams(window.location.search);
-    
+    // const apiImgUrl = process.env.REACT_APP_API_IMG_URL
+    // const apiUrl = process.env.REACT_APP_API_URL //API main URL
+    const apiImgUrl = "http://localhost:8800" //API main URL
+    const apiUrl = "http://localhost:8800/api" //API main URL
+
     const [getTalents, setGetTalents] = useState([]);
-    // const [urlToFetch, setUrlToFetch] = useState(`${apiUrl}/admin`)
-    
-    // const {data, loading/*, error*/} = useFetch(urlToFetch)
-    // const {data, loading, rrror} = reFetch(urlToFetch)
-    
-    
+
     
     useEffect(()=>{
         const axiosInstance = axios.create({
@@ -39,15 +29,7 @@ const List = () => {
         }
         fetchTalent()
     },[])
-    // useEffect(()=>{
-    //     const fetchTalent = async () =>{
-    //         const res = await axios.get(`${apiUrl}/admin`);
-    //         setGetTalents(res.data)
-    //     }
-    //     fetchTalent()
-    // },[getTalents])
-
-    console.log(getTalents);
+    
 
      //SEACH TALENTS
     const handleAdminSeachCategory =(e) =>{
@@ -93,29 +75,42 @@ const List = () => {
         } catch (err) {
             console.log(err)
         }
-        // refresh()
     }
     
 
     const [showRegisterModal, setShowRegisterModal] = useState(false)
-    // const handleRgisterModal = () => {
-    //     setShowRegisterModal(true);
-    // }
+
 
     //CREATE TALENT
     const [file, setFile] = useState("");
     
     const [info, setInfo] = useState({})
+    const [dateOfBirth, setDateOfBirth] = useState()
+    const [age, setAge] = useState()
     
     const handleCloseRgisterModal = () => {
         setInfo({});
         setFile('');
+        setAge('');
+        setDateOfBirth('');
         setShowRegisterModal(false);
     }
 
     
     const handleChange = (e) =>{
         setInfo(prev=>({...prev, [e.target.id]: e.target.value}))
+    }
+
+    const handleDateOfBirthAndAge = (e) =>{
+        let dob = new Date(e.target.value);
+        console.log(dob);
+        var diff_ms = Date.now() - dob.getTime();
+        var age_dt = new Date(diff_ms); 
+      
+       let age = Math.abs(age_dt.getUTCFullYear() - 1970);
+
+       setDateOfBirth(e.target.value)
+       setAge(age)
     }
 
     // const [newFileNate, setNewFileNate] = useState('')
@@ -132,7 +127,9 @@ const List = () => {
           
             const pFileName = uploadRes.data.filename
             const newTalent = {
-                ...info, 
+                ...info,
+                dateOfBirth: dateOfBirth,
+                age: age, 
                 profileImg: pFileName
             };//getting all the user info from the form and the image url  to be saved(created)
             
@@ -183,7 +180,11 @@ const List = () => {
                                     <div className="fieldsContainer">
                                         <div className="fieldItem">
                                             <label htmlFor="dateOfBirth">Date of birth</label>
-                                            <input type="date" id="dateOfBirth" onChange={handleChange} />
+                                            <input type="date" id="dateOfBirth" onChange={handleDateOfBirthAndAge} />
+                                        </div>
+                                        <div className="fieldItem">
+                                            <label htmlFor="age">Age</label>
+                                            <input disabled type="text" id="age" value={age} style={{width:'40%', padding:'0.5em'}}/>
                                         </div>
                                         <div className="fieldItem">
                                             <label htmlFor="gender">Gender</label>
@@ -195,7 +196,6 @@ const List = () => {
                                             </select>
                                             
                                         </div>
-                                        
                                     </div>
                                     <div className="fieldsContainer">
                                         <div className="fieldItem">

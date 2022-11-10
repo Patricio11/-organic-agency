@@ -3,17 +3,22 @@
     display: flex;
     flex-direction: column;
     width: 19%;
-    height: 265px;
+    // height: 265px;
 
     .imgCardWrapper{
         position: relative;
         width: 100%;
         height: 100%;
 
-        img, video{
+        img{
+            width: 100%;
+            object-fit: cover;
+        }
+        video{
             width: 100%;
             height: 100%;
             object-fit: cover;
+            z-index: 2;
         }
 
         .imgActionBtn{
@@ -22,7 +27,7 @@
             display: flex;
             justify-content: space-between;
             gap: 5px;
-
+            z-index: 4;
             
             .setProfile{
                 display: flex;
@@ -45,7 +50,16 @@
                 color: #fff;
                 background-color: rgba(240, 22, 22, 0.745);
                 cursor: pointer;
-
+                
+            }
+            .imgDeleteBtnGrab{
+                
+                padding: 4px;
+                font-size: 1.88em;
+                color: #fff;
+                background-color: rgba(22, 55, 240, 0.745);
+                cursor: grab;
+                
             }
         }
     }

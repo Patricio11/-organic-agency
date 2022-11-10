@@ -24,13 +24,13 @@ const Login = () =>{
         dispatch({type:"LOGIN_START", payload: true});// This just update out Loading state
 
         
-        // const apiUrl = "http://localhost:8800/api" //API main URL
 
         // const apiUrl = process.env.REACT_APP_API_URL//API main URL
-        // const apiUrl = "http://localhost:8800/api" //API main URL
+        const apiUrl = "http://localhost:8800/api" //API main URL
 
         const axiosInstance = axios.create({
-            baseURL: process.env.REACT_APP_API_URL
+            baseURL: apiUrl
+            // baseURL: process.env.REACT_APP_API_URL
         })
 
 

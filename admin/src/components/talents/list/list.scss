@@ -49,7 +49,7 @@
                         gap: 10px;
                         cursor: pointer;
                     }
-                    #file{
+                    .profileImg{
                         display: none;
                     }
                     .selectedProfile {
@@ -62,7 +62,7 @@
                             position: relative;
                             bottom: -7px;
                             width: 100%;
-                            height: 100%;
+                            //height: 100%;
                             object-fit: cover;
                         }
                     }
@@ -232,9 +232,21 @@
         &.talentsListWrapper{
             .card{
                 width: 260px;
+                height: 360px;
 
-                .cardContainer{
-                    height: 20rem;
+                
+                a {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+
+                    // .cardContainer{
+                    //     position: relative;
+                    //     display: flex;
+                    //     justify-content: center;
+                    //     width: 100%;
+                    //     height: 100%;
+                    // }
                 }
             }
         }

@@ -26,7 +26,7 @@ import Documents from '../../components/single/documents/Documents';
 import { RiDeleteBack2Fill, RiEdit2Fill } from 'react-icons/ri';
 import { FileUploader } from 'react-drag-drop-files';
 
-const fileTypes = ["WEBP","JPEG", "PDF", "M4V", "MP4"];
+const fileTypes = ["WEBP", "PDF", "M4V", "MP4"];
 
 const Single = () => {
     const location = useLocation();
@@ -99,20 +99,17 @@ const Single = () => {
                 }
             ));
             
-            const newList = list.map((listItem, idx)=>{
+            const newList = list.map((listItem)=>{
                 let allFiles = [];
 
                 allFiles.push(
                     {
-                        "filename":listItem,
-                        "position": parseInt(talentData.polaroids.length >= 0 ? talentData.polaroids.length + idx : 0)
+                        "filename":listItem
                     }
                 );
 
                 return allFiles[0];
             })
-            console.log('talentData.polaroids.length')
-            console.log(talentData.polaroids.length)
             const newListDoc = list.map((listItem)=>{
                 let allFiles = [];
 
@@ -394,26 +391,6 @@ const Single = () => {
         clearAllFields()
     }
 
-    const handleDragedMediaChange =(file)=>{
-        // prev=>({...prev, [e.target.id]: e.target.value})
-        setFiles(file)
-        // setFiles(prev=>([...prev, file]))
-    }
-  
-    const handleUpdateMediaPosition = async (mediaFileList) => {
-
-        try {
-            const mediaList = {
-                mediaFileList: mediaFileList,
-            }
-           
-            const updateFilesPosition = await axios.put(`${apiUrl}/talents/${talentData._id}/files/updatePosition/${activedTab}`, mediaList);
-
-            setTalentData(updateFilesPosition.data)
-        } catch (err) {
-            console.log(err)
-        }
-    }
     return(
         
         <div className="single">
@@ -433,7 +410,7 @@ const Single = () => {
                                         </div>
                                         <div className="modalBody">
                                             <form  className='uploadMediaForm'>
-                                                <div className="filesUploadContainer">
+                                                <div className="selectedProfile">
                                                     {
                                                         activedTab==="documents" &&
                                                         <select id="doc_type" onChange={handleDocType}>
@@ -442,44 +419,7 @@ const Single = () => {
                                                             <option value="peper Work">Peper Work</option>
                                                         </select>
                                                     }
-                                                    <FileUploader 
-                                                        multiple={true} 
-                                                        handleChange={handleDragedMediaChange} 
-                                                        name="file" 
-                                                        types={fileTypes} 
-                                                        fileOrFiles={null}
-                                                    />
-                                                    {/* <p>{files ? `File name: ${files[0].name}` : "no files uploaded yet"}</p> */}
-                                                    {/* <input className='uploadButton' type="file" id="file"  multiple name={activedTab} onChange={(e)=>setFiles(e.target.files)}/> */}
-                                                </div>
-                                                <div className="uploadPreview" >
-
-                                                    {
-                                                        
-                                                        files !== "" ?
-                                                          Array.from(files).map((singleFile, index)=>{
-                                                                return(
-
-                                                                    <div className="uploadPreview_Item" key={index}>
-                                                                        {
-                                                                           singleFile.name.split('.').pop() === "webp" ? 
-                                                                            <img  src={ URL.createObjectURL(singleFile)} alt="" />
-                                                                            :
-                                                                            singleFile.name.split('.').pop() === "mp4" ? 
-                                                                            <video src={ URL.createObjectURL(singleFile)} controls ></video>
-                                                                            :
-                                                                            singleFile.name.split('.').pop() === "m4v" ? 
-                                                                            <video src={ URL.createObjectURL(singleFile)} controls ></video>
-                                                                            :
-                                                                            singleFile.name.split('.').pop() === "pdf" ?
-                                                                            <span>{singleFile.name}</span>:null
-                                                                        }
-                                                                    </div>
-
-                                                                )
-                                                            })
-                                                        : null
-                                                    }
+                                                    <input className='uploadButton' type="file" id="file"  multiple name={activedTab} onChange={(e)=>setFiles(e.target.files)}/>
                                                 </div>
                                                 <button onClick={handleSaveUploads} className='saveUpload'>Save</button>
                                             </form>
@@ -910,7 +850,6 @@ const Single = () => {
                                     baseMediaUrl={baseMediaUrl}  
                                     setShowUploadModal={setShowUploadModal} 
                                     handleDeleteMedia={(event,mediaId) => handleDeleteMedia(event, mediaId)}
-                                    handleUpdateMediaPosition={(mediaList) => handleUpdateMediaPosition(mediaList)}
                                 /> :
                             activedTab==="polaroids" ? 
                                 <Polaroids 
@@ -918,7 +857,6 @@ const Single = () => {
                                     baseMediaUrl={baseMediaUrl} 
                                     setShowUploadModal={setShowUploadModal}
                                     handleDeleteMedia={(event,mediaId) => handleDeleteMedia(event, mediaId)}
-                                    handleUpdateMediaPosition={(mediaList) => handleUpdateMediaPosition(mediaList)}
                                 /> : 
                             activedTab==="videos" ? 
                                 <Videos 
@@ -926,7 +864,6 @@ const Single = () => {
                                     baseMediaUrl={baseMediaUrl} 
                                     setShowUploadModal={setShowUploadModal}
                                     handleDeleteMedia={(event,mediaId) => handleDeleteMedia(event, mediaId)}
-                                    handleUpdateMediaPosition={(mediaList) => handleUpdateMediaPosition(mediaList)}
                                 /> :
                             activedTab==="physical_details" ? 
                             <PhysicalDetails talentData={talentData.sizes} talentGender={talentData.gender} /> :

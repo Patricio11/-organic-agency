@@ -37,7 +37,7 @@ const Card = ({singleCard, apiImgUrl, isPresentation, isTalentRole, addTalentToR
                 </div>
                 :
                 isTalentRole === true ? 
-                <a href={`http://localhost:8800/api/talents/${singleCard._id}`} >
+                <a href={`https://organictalentmanagement.co.za/talents/${singleCard._id}`}>
                     <div className="cardContainer">
                         <img  
                             src={ 
