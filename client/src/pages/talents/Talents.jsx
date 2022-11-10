@@ -6,13 +6,13 @@ import Footer from "../../components/footer/Footer";
 const Talents = () => {
      
     return (
-        <>
-            <div className="talents">
-                <NavBar />
-                <List />
-            </div>
+    
+        <div className="talents">
+            <NavBar />
+            <List />
             <Footer />
-        </>
+        </div>
+       
         
     )
 }

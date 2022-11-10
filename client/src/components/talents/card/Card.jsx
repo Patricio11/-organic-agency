@@ -1,11 +1,16 @@
 import "./card.scss"
 
-// import { Navigate } from "react-router-dom";
 
 const Card = ({singleCardTalent, apiImgUrl}) => {
     const baseMediaUrlVideos = `${apiImgUrl}/uploads/videos/`
     
-    console.log(singleCardTalent.videos.length > 0)
+    const handlePalyVideo = (e) =>{
+        e.target.play();
+    }
+    const handlePouseVideo = (e) =>{
+        e.target.pause();
+    }
+    singleCardTalent.videos?.sort((a, b) => b.position - a.position)
     return (
         <div className="card" >
             <div className="cardContainer">
@@ -18,7 +23,9 @@ const Card = ({singleCardTalent, apiImgUrl}) => {
                 />
                 {
                    singleCardTalent.videos.length > 0 && singleCardTalent.videos !== undefined && 
-                   <video style={{display:'none'}} src={baseMediaUrlVideos + singleCardTalent.videos[0].filename} autoPlay muted ></video>
+                   <video style={{display:'none'}} onMouseOver={handlePalyVideo} onClick={handlePouseVideo} onMouseLeave={handlePouseVideo} loop muted>
+                        <source src={baseMediaUrlVideos + singleCardTalent.videos[0].filename} />
+                   </video>
                 }
 
                 <div className="talentName">

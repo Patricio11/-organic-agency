@@ -15,7 +15,8 @@ const SingleTalent = () => {
     )
     const baseMediaUrlVideos = `${apiImgUrl}/uploads/videos/`
 
-    console.log(data)
+    data.polaroids?.sort((a, b) => b.position - a.position)
+    data.videos?.sort((a, b) => b.position - a.position)
     return (
         
         <div className="sTalentContainer">
@@ -45,32 +46,38 @@ const SingleTalent = () => {
 
                         <div className="tMedia">
                             <div className="profile">
-                                <a href="/downlaod">Download Z-card</a>
+                                {
+                                    data.documents && data.documents.doc_type === 'zCard' ? 
+                                    <a href={`${apiImgUrl}/uploads/documents/${data.documents.filename}`}>Download Z-card</a> : null
+                                }
                                 <div className="pContainer">
 
                                     <div className="left">
-                                        {/* <img src="https://static.wixstatic.com/media/5e0110_dcd3d48c41cf48ddb834ec3f8c7293eb~mv2.jpg/v1/fill/w_2000,h_2000,al_c,q_90,enc_auto/4U7A8894_edited.jpg" alt="" /> */}
-                                        <img  
-                                            src={ 
-                                                data.profileImg ? 
-                                                `${apiImgUrl}/uploads/profiles/${data.profileImg}` : 
-                                                'https://via.placeholder.com/250x350'
-                                            } alt="" 
-                                        />
-                                    
+                                       <div className="left_wrapper">
+                                            <img  
+                                                src={ 
+                                                    data.profileImg ? 
+                                                    `${apiImgUrl}/uploads/profiles/${data.profileImg}` : 
+                                                    'https://via.placeholder.com/250x350'
+                                                } alt="" 
+                                            />
+                                        </div>
                                     </div>
                                     <div className="right">
-                                        {
-                                            data.polaroids && data.polaroids.length > 0 && data.polaroids !== undefined &&
-                                            data.polaroids.map((polaroid)=>(
-                                                <div className="polaroidContainer" key={polaroid._id}>
-                                                    <img  
-                                                        src={`${apiImgUrl}/uploads/polaroids/${polaroid.filename}`} alt="" 
-                                                    />
-                                                    {/* <img src="https://static.wixstatic.com/media/5e0110_6cba58f457ed4ed7807e1c93dc9c1df7~mv2.jpg/v1/fill/w_1940,h_2461,al_c,q_90,enc_auto/Gabriela%20copy_edited.jpg" alt="" /> */}
-                                                </div>
-                                            ))
-                                        }
+                                        <div className="right_wrapper">
+
+                                            {
+                                                data.polaroids && data.polaroids.length > 0 && data.polaroids !== undefined &&
+                                                data.polaroids.map((polaroid)=>(
+                                                    <div className="polaroidContainer" key={polaroid._id}>
+                                                        <img  
+                                                            src={`${apiImgUrl}/uploads/polaroids/${polaroid.filename}`} alt="" 
+                                                        />
+                                                        {/* <img src="https://static.wixstatic.com/media/5e0110_6cba58f457ed4ed7807e1c93dc9c1df7~mv2.jpg/v1/fill/w_1940,h_2461,al_c,q_90,enc_auto/Gabriela%20copy_edited.jpg" alt="" /> */}
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -78,15 +85,11 @@ const SingleTalent = () => {
                                 <div className="vWrapper">
 
                                     <div className="vContainer">
-                                        {/* <video preload autoPlay loop playsInline src="https://video.wixstatic.com/video/5e0110_6a2b23059ff0414bb69a0e11bc02d50f/1080p/mp4/file.mp4"></video> */}
-                                        {/* <video src={testingV} autoPlay muted  loop controls width="470" height="548"></video>
-                                        <video src={gabriV}  autoPlay muted loop controls width="470" height="548"></video> */}
                                         {
                                             data.videos && data.videos.length > 0 && data.videos !== undefined &&
                                             data.videos.map((video)=>(
                                                 <div className="videoContainer" key={video._id}>
-                                                   <video src={baseMediaUrlVideos + video.filename} autoPlay muted loop controls width="470" height="548"></video>
-                                                    {/* <img src="https://static.wixstatic.com/media/5e0110_6cba58f457ed4ed7807e1c93dc9c1df7~mv2.jpg/v1/fill/w_1940,h_2461,al_c,q_90,enc_auto/Gabriela%20copy_edited.jpg" alt="" /> */}
+                                                   <video src={baseMediaUrlVideos + video.filename} preload="metadata" muted loop controls  width="470" height="548"></video>
                                                 </div>
                                             ))
                                         }
@@ -99,7 +102,7 @@ const SingleTalent = () => {
                             <div className="videoSection">
                                 <SliderList 
                                     baseMediaUrlPortfolio = {`${apiImgUrl}/uploads/portfoleo/`}
-                                    portfoleo = {data.portfoleo}
+                                    portfoleo = {data.portfoleo?.sort((a, b) => b.position - a.position)}
                                 />
                                 
                             </div>

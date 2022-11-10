@@ -15,6 +15,7 @@
 
         .cContainer{
             display: flex;
+            flex-wrap: wrap;
             gap: 15px;
 
             .cLeft{
@@ -71,5 +72,15 @@
                 width: 100%;
             }
         }
+    }
+}
+
+@media (max-width:999px){
+    .contact .cWrapper{
+        padding: 2em;
+        padding-top: 0 ;
+    }
+    .contact .cWrapper .cContainer{
+        flex-direction: column-reverse;
     }
 }

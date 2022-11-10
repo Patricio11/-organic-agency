@@ -25,7 +25,7 @@ const Home = () => {
                                 </Link>
                             ))
                         }
-                        <div className="specialities">
+                        {/* <div className="specialities">
                             <span className="menuItem">Specialities</span>
                             <div className="specialitiesWrapper" >
                                 <Link to={'/talents/all?speciality=Hands'} className="menuItem">
@@ -44,7 +44,7 @@ const Home = () => {
                                     Men Real Families
                                 </Link>
                             </div>
-                        </div> 
+                        </div>  */}
                         <div className="contactUs">
                             <Link to="/contact" className="cIcon">
                                 <PhoneEnabledOutlinedIcon />

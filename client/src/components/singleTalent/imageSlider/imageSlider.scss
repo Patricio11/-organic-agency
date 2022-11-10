@@ -43,3 +43,21 @@
         }
     }
 }
+
+
+@media (max-width:999px){
+    .imageSlider .sliderWrapper .sliderImg {
+        width: 150%;
+        z-index: 1;
+    }
+    .imageSlider .slidArrows{
+        z-index: 2;
+    }
+    
+
+    svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.slidArrows.css-i4bv87-MuiSvgIcon-root {
+        background: #fff;
+        margin: 0;
+        padding: 0.4em;
+    }
+}

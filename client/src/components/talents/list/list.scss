@@ -5,30 +5,60 @@
 
     .searchTalent {
         position: absolute;
-        right: 6vw;
+        right: 6em;
         display: flex;
         align-items: center;
-        width: 21.5%;
+        gap: 0.5em;
+        border: 1px solid gray;
 
         .searchInput{
-            flex: 9;
+            flex: 7;
             border: none;
-            border-bottom: 3px solid gray;
+            // border-bottom: 3px solid gray;
             outline: none;
+            
         }
         .sIcon{
             flex: 1;
+            border-left: 1px solid gray;
+            padding: 0.2em;
         }
     }
 
     .lWrapper{
         padding: var(--main-padding-tb) var(--main-padding-lr);
-        
+        // padding-left: 0;
+        // padding-right: 0;
+
         .lCardContainer{
             width: 100%;
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
+
+            a{
+                width: 24%;
+                height: 22em;
+                position: relative;
+                display: flex;
+            }
         }
+    }
+}
+
+
+@media (max-width:999px){
+
+    .list .lWrapper .lCardContainer a {
+        width: 42.222% !important;
+        height: 13em;
+    }
+
+    .list .lWrapper{
+        padding-left:0 ;
+        padding-right:0 ;
+    }
+    .list .lWrapper .lCardContainer{
+        justify-content: center;
     }
 }

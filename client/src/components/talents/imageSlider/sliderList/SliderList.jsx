@@ -17,6 +17,7 @@ const SliderList = ({baseMediaUrlPortfolio, portfoleo}) =>{
         setSlideNumber(indx);
         setOpenSlider(true);
     }
+    // portfoleo?.sort((a, b) => b.position - a.position)
     return (
         <div className="sList">
             { openSlider &&

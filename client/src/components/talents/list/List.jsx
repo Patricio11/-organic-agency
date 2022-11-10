@@ -7,7 +7,6 @@ import { useEffect, useState } from "react"
 
 
 const List = () => {
-    // dotenv.config()
     const apiUrl = process.env.REACT_APP_API_URL //API main URL
     const apiImgUrl = process.env.REACT_APP_API_IMG_URL //API main URL
     const [urlToFetch, setUrlToFetch] = useState()
@@ -26,17 +25,31 @@ const List = () => {
     const location = useLocation();
 
     useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        console.log('Location changed '+urlParams.has('gender'));
-        
-        urlParams.has('gender') ? 
-            setUrlToFetch(`${apiUrl}/talents/all?gender=${urlParams.get('gender')}`) :
-        urlParams.has('influencers') ?
-            setUrlToFetch(`${apiUrl}/talents/all?influencers=true`) :
-        urlParams.has('speciality') ?
-            setUrlToFetch(`${apiUrl}/talents/all?speciality=${urlParams.get('speciality')}`) :
-            setUrlToFetch(`${apiUrl}/talents/featured`)
+        const getTalentByCategories = () => {
+
+            const urlParams = new URLSearchParams(window.location.search);
+    
+            urlParams.has('gender') ? 
+                setUrlToFetch(`${apiUrl}/talents/all?gender=${urlParams.get('gender')}`) :
+            // urlParams.has('influencers') ?
+            //     setUrlToFetch(`${apiUrl}/talents/all?influencers=true`) :
+            // urlParams.has('speciality') ?
+            //     setUrlToFetch(`${apiUrl}/talents/all?speciality=${urlParams.get('speciality')}`) :
+                setUrlToFetch(`${apiUrl}/talents/featured`)
+        }
+        getTalentByCategories()
     }, [location, apiUrl]);
+    // useEffect(() => {
+    //     const urlParams = new URLSearchParams(window.location.search);
+
+    //     urlParams.has('gender') ? 
+    //         setUrlToFetch(`${apiUrl}/talents/all?gender=${urlParams.get('gender')}`) :
+    //     urlParams.has('influencers') ?
+    //         setUrlToFetch(`${apiUrl}/talents/all?influencers=true`) :
+    //     urlParams.has('speciality') ?
+    //         setUrlToFetch(`${apiUrl}/talents/all?speciality=${urlParams.get('speciality')}`) :
+    //         setUrlToFetch(`${apiUrl}/talents/featured`)
+    // }, [location, apiUrl]);
 
     return (
         <div className="list">
@@ -57,7 +70,6 @@ const List = () => {
                     <div className="lCardContainer">
                         {
                             data.map((talent) => (
-                                // console.log(talent.name)
                                 <Link to={`/talents/${talent._id}`} key={talent._id}>
                                     <Card singleCardTalent={talent} apiImgUrl={apiImgUrl}/>
                                 </Link>

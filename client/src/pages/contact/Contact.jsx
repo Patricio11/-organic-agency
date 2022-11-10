@@ -30,7 +30,7 @@ const Contact = () =>{
                         </div>
                         <div className="cRight">
                             <h1>Get in Touch!</h1>
-                            <span>Email: info@organictalentmanagement.co.za</span>
+                            <span>Email: caitlin@organictalentmanagement.co.za</span>
                             <span>Tel: +27 (0)81 593 2176</span>
                             <span>Due to the Covid 19 pandemic we are working remotely; all meetings are by appointment.</span>
                         </div>
