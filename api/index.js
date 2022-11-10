@@ -9,16 +9,7 @@ const usersRoute = require("./routes/users.js")
 const talentsRoute = require("./routes/talents.js")
 const adminRoute = require("./routes/admin.js")
 const presentationRoute = require("./routes/presentation.js")
-// import dotenv from "dotenv";
-// import express from "express"
-// import mongoose from "mongoose";
-// import cookieParser from "cookie-parser";
-// import cors from "cors"
-// import authRoute from "./routes/auth.js"
-// import usersRoute from "./routes/users.js"
-// import talentsRoute from "./routes/talents.js"
-// import adminRoute from "./routes/admin.js"
-// import presentationRoute from "./routes/presentation.js"
+
 
 const app = express()
 if (process.env.NODE_ENV !== 'production'){
@@ -26,21 +17,21 @@ if (process.env.NODE_ENV !== 'production'){
 }
 //Tell the server to allow request from specific address
 // We install cors to allow request from specifyed locations to out API
-// const whitelistUrl = [process.env.FRONTEND_ADDRESS_ADMIN, process.env.FRONTEND_ADDRESS_CLIENT]
-// const corsOptions = {
-//   origin: (origin, callback) => {
-//     if (whitelistUrl.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error())
-//     }
-//   }
-// }
-app.use(cors({}))
-// app.use(cors({
-//     origin: corsOptions,
-//     credentials: true // to allow access to cookies 
-// }))
+const whitelistUrl = [process.env.FRONTEND_ADDRESS_ADMIN, process.env.FRONTEND_ADDRESS_CLIENT]
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelistUrl.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error())
+    }
+  }
+}
+// app.use(cors({}))
+app.use(cors({
+    origin: corsOptions,
+    credentials: true // to allow access to cookies 
+}))
 
 //To create the __dirname
 const { dirname } =require( 'path');

@@ -18,7 +18,9 @@ const {
     updateTalentFiles, 
     updateTalentJobHistoryDelete, 
     updateTalentSocialMedia, 
-    videosFileUpload
+    videosFileUpload,
+    updateTalentJobHistory,
+    updateTalentFilesPosition
 } = require("../controllers/talent.js");
 // import { verifyAdmin, verifyUser } from "../utils/verifyAdmin.js";
 
@@ -138,10 +140,14 @@ router.post("/", /*verifyAdmin,*/ createTalent)
 router.put("/:id",  updateTalent)
 router.put("/social/:id",  updateTalentSocialMedia)
 router.put("/:id/delete-jobHistory",  updateTalentJobHistoryDelete)
+router.put("/:id/update-jobHistory/:jobHistoryId",  updateTalentJobHistory)
 // router.put("/:id", verifyUser, updateTalent)
 // UPDATE
 router.put("/files/update/:id",  updateTalentFiles)
+
+router.put("/:talentId/files/updatePosition/:activTab",  updateTalentFilesPosition)
 // router.put("/:id", verifyUser, updateTalent)
+
 router.get("/files/delete",  deleteTalentFiles)
 
 

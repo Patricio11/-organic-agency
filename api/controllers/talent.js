@@ -56,31 +56,76 @@ exports.createTalent =  async (req, res, next)=>{
 
 //UPDATE TALENT
 exports.updateTalent = async (req, res, next) =>{
-    console.log(req.body)
+    let fileBasePath = `uploads/profiles`;
+    const deletePath = path.join('public', fileBasePath) 
+
     try{
+        if(req.body.profileImg){
+            const oldTalent = await Talent.findById(req.params.id);
+            const oldFileName = oldTalent.profileImg
+            const mainPath = deletePath+`/${oldFileName}`;
+           
+            fs.unlink(mainPath, (err)=>{
+                if (err) {
+                    console.error(err)
+                    return
+                }else{
+                    console.log("File deleted!!..!!")
+                }
+            })
+        }
+        
         const upadatedTalent = await Talent.findByIdAndUpdate(
             req.params.id, 
             { $set: req.body},
             {new: true}//To retrun the updated document
         )
         res.status(201).json(upadatedTalent);
-    }catch(error){
+    }catch(err){
         next(err)
     }
 }
-exports.updateTalentJobHistoryDelete = async (req, res, next) =>{
-    console.log(req.body)
+
+exports.updateTalentJobHistory = async (req, res, next) =>{
+    
     try{
+        const upadatedTalent = await Talent.updateOne(
+            {_id:req.params.id},
+            {$set: {'jobHistory.$[i]': req.body.jobHistory}},
+            {arrayFilters:[ {'i._id': req.params.jobHistoryId}]},
+            {new: true}
+        )
+        // const upadatedTalent = await Talent.update(
+        //     {_id:req.params.id},
+        //     {$set: {'jobHistory.$[i]': req.body.jobHistory}},
+        //     {arrayFilters:[ {'i._id': req.params.jobHistoryId}]},
+        //     {new: true}
+        // )
+        console.log(upadatedTalent)
+        res.status(201).json(upadatedTalent);
+    }catch(error){
+        next(err)
+    }
+ 
+}
+
+exports.updateTalentJobHistoryDelete = async (req, res, next) =>{
+    
+    try{
+        
         const upadatedTalent = await Talent.findByIdAndUpdate(
             req.params.id, 
             { $pull: {jobHistory:req.body}},
             {new: true}//To retrun the updated document
         )
+        
         res.status(201).json(upadatedTalent);
     }catch(error){
         next(err)
     }
+   
 }
+
 exports.updateTalentSocialMedia = async (req, res, next) =>{
     // console.log(req.body)
     try{
@@ -108,11 +153,61 @@ exports.updateTalentFiles = async (req, res, next) =>{
         )
         console.log(upadatedTalent)
         res.status(201).json(upadatedTalent);
-    }catch(error){
+    }catch(err){
         next(err)
     }
 }
 
+exports.updateTalentFilesPosition = async (req, res) => {
+    const { mediaFileList} = req.body
+    const { activTab } = req.params
+
+    try {
+        switch (activTab) {
+            case 'polaroids':
+                for(const key in mediaFileList.reverse()){
+                    const mediaFile = mediaFileList[key]
+        
+                    await Talent.findByIdAndUpdate(
+                        {_id:req.params.talentId},
+                        {$set: {'polaroids.$[i].position': key}},
+                        {arrayFilters:[ {'i._id': mediaFile._id}]}
+                    )
+                }
+                break;
+            case 'portfoleo':
+                for(const key in mediaFileList.reverse()){
+                    const mediaFile = mediaFileList[key]
+        
+                    await Talent.findByIdAndUpdate(
+                        {_id:req.params.talentId},
+                        {$set: {'portfoleo.$[i].position': key}},
+                        {arrayFilters:[ {'i._id': mediaFile._id}]}
+                    )
+                }
+                break;
+            case 'videos':
+                for(const key in mediaFileList.reverse()){
+                    const mediaFile = mediaFileList[key]
+        
+                    await Talent.findByIdAndUpdate(
+                        {_id:req.params.talentId},
+                        {$set: {'videos.$[i].position': key}},
+                        {arrayFilters:[ {'i._id': mediaFile._id}]}
+                    )
+                }
+                break;
+        
+            default:
+                break;
+        }
+
+        const talent = await Talent.findById(req.params.talentId);
+        res.status(201).json(talent)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+}
 
 exports.deleteTalentFiles = async (req, res, next) =>{
     let fileBasePath = `uploads/${req.query.activeTab}`;
@@ -201,6 +296,7 @@ exports.getAllTalents = async (req, res, next)=>{
    
     try {
         const allTalents = await Talent.find({})
+        console.log(allTalents);
         res.status(201).json(allTalents);
     } catch (error) {
         next(err);
@@ -272,8 +368,11 @@ exports.getTalentByGender = async (req, res, next)=>{
             const getTalentBySpeciality = await Talent.find({specialities: { $in: [speciality]}})
             console.log(speciality);
             res.status(201).json(getTalentBySpeciality);
+        }else{
+            const getTalentByGender = await Talent.find({})
+            res.status(201).json(getTalentByGender); 
         }
-    } catch (error) {
+    } catch (err) {
         next(err);
     }
 }

@@ -64,14 +64,22 @@ const TalentSchema = new mongoose.Schema({
 
     sizes: [{
         height: {type :String}, 
-        bust: {type:Number}, 
-        waist: {type:Number}, 
-        hips: {type:Number},
-        dress: {type:Number},
+        chest: {type :String},
+        suit: {type :String},
+        collar: {type :String},
+        bust: {type:String}, 
+        waist: {type:String}, 
+        hips: {type:String},
+        dress: {type:String},
         shoe: {type:String},
         hair: {type:String},
         eyes: {type:String},
     }],
+    // address: [
+    //     {country: String},
+    //     {city: String},
+    //     {zip: String}
+    // ],
     address: {
         type: String
     },
@@ -99,18 +107,24 @@ const TalentSchema = new mongoose.Schema({
     polaroids:[{
         filename: {type: String}, 
         isProfile:{type: Boolean,default: false}, 
-        isVisible:{type: Boolean,default: true}
+        isVisible:{type: Boolean,default: true},
+        position: {type: Number}
     }],
     portfoleo:[{
         filename: {type:String}, 
         isProfile:{type: Boolean,default: false}, 
-        isVisible:{type: Boolean,default: true}
+        isVisible:{type: Boolean,default: true},
+        position:{type: Number}
     }],
     videos:[{
         filename: {type:String},
         isMain:{type: Boolean,default: false}, 
-        isVisible:{type: Boolean,default: true}
-    }]
+        isVisible:{type: Boolean,default: true},
+        position:{type: Number}
+    }],
+    position:{
+        type: Number
+    }
 },
 {timestamps:true}
 )
