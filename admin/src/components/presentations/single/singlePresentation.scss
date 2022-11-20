@@ -23,10 +23,23 @@
             
                 .cardContainer {
                     height: 15rem;
+                    display: flex;
+                    position: relative;
+
+                    img{
+                        width: 100%;
+                    }
 
                     .talentName{
+                        padding: 2px 5px;
+                        font-weight: 600;
                         width: unset;
                         font-size: 17px;
+                        position: absolute;
+                        bottom: 0;
+                        display: flex;
+                        flex-direction: column;
+                        background: #d3d3d3a8;
                     }
                 }
             }
@@ -208,10 +221,11 @@
 
                             .cardContainer{
                                 height: 18rem;
-
+                                
                                 .talentName{
                                     width: unset;
                                     padding-left: 0.5em;
+                                    
                                 }
                             }
                         }

@@ -255,6 +255,33 @@
                 &.mainTop{
                     padding-bottom: 0;
 
+                    .singleActions {
+                        display: flex;
+                        gap: 0.5em;
+                        align-items: center;
+                        position: absolute;
+                        top: 18px;
+                        right: 20px;
+
+                        .iconBtn{
+                            display: flex;
+                            align-items: center;
+                            font-size: 15px;
+                            font-weight: 600;
+                            padding: 0.5em;
+                            cursor: pointer;
+
+                            &.copyLink{
+                                color: #7451f8;
+                                background-color: rgba(117, 81, 248, 0.0941176471);
+                            }
+                            &.deleteBtn{
+                                background-color: #CC232A;
+                                color: #fff;
+                            }
+
+                        }
+                    }
                     .actionTabs {
                         display: flex;
                         margin-top: 2em;

@@ -23,19 +23,25 @@ const List = () => {
 
 
   useEffect(()=>{
+    const axiosInstance = axios.create({
+      baseURL: process.env.REACT_APP_API_URL
+    })
     const fetchPresentations = async () =>{
-      const res = await axios.get(`${apiUrl}/presentation`);
+      const res = await axiosInstance.get(`/presentation`);
       setGetPresentation(res.data)
     }
       fetchPresentations()
-  },[])
+  },[apiUrl])
   useEffect(()=>{
+    const axiosInstance = axios.create({
+      baseURL: process.env.REACT_APP_API_URL
+    })
     const fetchTalents = async () =>{
-      const res = await axios.get(`${apiUrl}/admin`);
+      const res = await axiosInstance.get(`/admin`);
       setTalents(res.data)
     }
     fetchTalents()
-  },[])
+  },[apiUrl])
 
   
   const handleChange = (e) =>{

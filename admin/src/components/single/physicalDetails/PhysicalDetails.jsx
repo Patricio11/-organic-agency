@@ -116,7 +116,7 @@ const PhysicalDetails = ({talentData, talentGender}) =>{
             'sizes': newSizesList,
         }
         const resoultSizes = await axios.put(`${apiUrl}/talents/${talent_id}`, updatedSizes);//sending register request to the API to register a user
-        // console.log(resoultSizes.data.sizes)
+        console.log(resoultSizes.data.sizes)
         setSizesUpdated(true)
     }
     

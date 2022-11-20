@@ -24,7 +24,7 @@ const PublicPresentation = () => {
       setGetPresentation(res.data)
     }
       fetchPresentation()
-  },[presentationId])
+  },[presentationId, apiUrl])
 
   return (
     <div>

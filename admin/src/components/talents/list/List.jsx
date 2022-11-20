@@ -3,18 +3,19 @@ import "./list.scss";
 import SearchOutlined from "@mui/icons-material/SearchOutlined";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import { FiMove } from "react-icons/fi"
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import { DragDropContext,  Droppable, Draggable } from 'react-beautiful-dnd'
+
 const List = () => {
     const [seachTalent, setSeachTalent] = useState('')
     const [searchCategory, setSearchCategory] = useState('all')
-    // const apiImgUrl = process.env.REACT_APP_API_IMG_URL
-    // const apiUrl = process.env.REACT_APP_API_URL //API main URL
-    const apiImgUrl = "http://localhost:8800" //API main URL
-    const apiUrl = "http://localhost:8800/api" //API main URL
+    const apiImgUrl = process.env.REACT_APP_API_IMG_URL
+    const apiUrl = process.env.REACT_APP_API_URL //API main URL
 
     const [getTalents, setGetTalents] = useState([]);
 
@@ -51,6 +52,8 @@ const List = () => {
         setSearchCategory('age')
         setSeachTalent(e.target.value)
     }
+
+    // SEAHC OPTIONS
     useEffect(()=>{
 
         const fetchTalent = async () =>{
@@ -58,8 +61,17 @@ const List = () => {
                 baseURL: process.env.REACT_APP_API_URL
             })
             
-            const res = await axiosInstance.get(`/admin/talents/search_result?search_category=${searchCategory}&search=${seachTalent}`);
-            setGetTalents(res.data);
+            if(searchCategory==='all'){
+                const res = await axiosInstance.get(`/admin`);
+                setGetTalents(res.data);
+            }else if(searchCategory==='featured'){
+
+                const res = await axiosInstance.get(`/talents/featured`);
+                setGetTalents(res.data);
+            }else{
+                const res = await axiosInstance.get(`/admin/talents/search_result?search_category=${searchCategory}&search=${seachTalent}`);
+                setGetTalents(res.data);
+            }
           
         }
         fetchTalent()
@@ -75,6 +87,32 @@ const List = () => {
         } catch (err) {
             console.log(err)
         }
+    }
+
+    const handleFeatured = async (id, isFeatured)=>{
+        const isTalentFeatured = !isFeatured;
+        const featureTalent = {
+            featured: isTalentFeatured,
+        }
+
+
+        const axiosInstance = axios.create({
+            baseURL: process.env.REACT_APP_API_URL
+        })
+        try {
+            await axiosInstance.put(`/talents/${id}`, featureTalent)
+
+            if(searchCategory==='featured'){
+                const res = await axiosInstance.get(`/talents/featured`);
+                setGetTalents(res.data);
+            }else{
+                const res = await axiosInstance.get(`/admin`);
+                setGetTalents(res.data);
+            }
+        } catch (err) {
+            console.log(err)
+        }
+
     }
     
 
@@ -145,6 +183,35 @@ const List = () => {
         setInfo({});
         setFile('');
         setShowRegisterModal(false)
+    }
+
+    //SORT FEATURED TALENTS
+    const handleUpdateTalentPosition = async (mediaFileList) => {
+
+        try {
+            const talentListOrder = {
+                talentList: mediaFileList,
+            }
+           
+            const updateFilesPosition = await axios.put(`${apiUrl}/talents/featuredPosition`, talentListOrder);
+
+            getTalents(updateFilesPosition.data)
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    const onDragEnd = async result =>{
+        const { destination, source} = result;
+        if(!destination) return;
+        if(destination.droppableId === source.draggableId && destination.index === source.index)return;
+        
+        const newList = [...getTalents]
+        const [removed] = newList.splice(source.index, 1)
+        newList.splice(destination.index, 0, removed)
+
+        console.log(newList)
+        handleUpdateTalentPosition(newList)
     }
     
     return (
@@ -247,7 +314,8 @@ const List = () => {
             <div className="listActionSection">
                 <div className="searchTalent">
                     <select name="" className="searchCategory" onChange={handleAdminSeachCategory}>
-                        <option value="">All</option>
+                        <option value="all">All</option>
+                        <option value="featured">Featured</option>
                         <option value="gender">Gender</option>
                         <option value="age">Age</option>
                         <option value="city">City</option>
@@ -295,34 +363,76 @@ const List = () => {
                     className="createTalentBtn"
                 ><PersonAddAltIcon /> Create Talente</button>
             </div>
-            <div className="lWrapper talentsListWrapper">
-                {
-                    // loading ? "Is Loading" : 
-                    <div className="lCardContainer">
-                        {
-                            getTalents?.map((talent) => (
-                                
-                                <div className="talentCardContainer" key={talent._id}>
+            <DragDropContext
+                onDragEnd={onDragEnd}
+            >
 
-                                    <div className="actionContauner">
-                                        <MoreVertIcon className="actionIcon" />
-                                        <div className="actionOptions">
-                                            {/* <span className="optionItem">Feature</span> */}
-                                            {/* <span className="optionItem">Edit</span> */}
-                                            <span onClick={()=>handleDelete(talent._id)} className="optionItem">Delete</span>
-                                        </div>
+                <div className="lWrapper talentsListWrapper">
+                    {
+                        // loading ? "Is Loading" : 
+                        <Droppable 
+                            droppableId="talents001"
+                            direction="horizontal"
+                        >
+                            {
+                                (provided) => (
+                                    <div className="lCardContainer"
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}
+                                    >
+                                        {
+                                            getTalents?.map((talent, idx) => (
+                                                <Draggable
+                                                    draggableId={talent._id}
+                                                    key={talent._id}
+                                                    index={idx}
+                                                >
+                                                    {
+                                                        (provided)=>(
+                                                            
+                                                            <div 
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                className="talentCardContainer" 
+                                                            >
+                                                                {
+                                                                    searchCategory === 'featured' ?
+                                                                    <div className="moveContainer">
+                                                                        <span 
+                                                                            {...provided.dragHandleProps}
+                                                                        >
+                                                                            <FiMove className="imgDeleteBtnGrab"/>
+                                                                        </span>
+                                                                    </div>
+                                                                    : null
+                                                                }
+                                                                
+                                                                
+                                                                <div className="actionContauner">
+                                                                    <MoreVertIcon className="actionIcon" />
+                                                                    <div className="actionOptions">
+                                                                        <span onClick={()=>handleFeatured(talent._id, talent.featured)} className={talent.featured ? 'optionItem active' : 'optionItem'}>Feature</span>
+                                                                        {/* <span className="optionItem">Edit</span> */}
+                                                                        <span onClick={()=>handleDelete(talent._id)} className="optionItem">Delete</span>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <Card singleCard={talent} apiImgUrl={apiImgUrl}/>
+                                                            
+                                                            </div>
+                                                        )
+                                                    }
+                                                </Draggable>
+                                            ))
+                                        }
+                                        {provided.placeholder}
                                     </div>
-                                    
-                                    <Card singleCard={talent} apiImgUrl={apiImgUrl}/>
-                                
-                                </div>
-                            ))
-                        }
-                        
-                        
-                    </div>
-                }
-            </div>
+                                )
+                            }
+                        </Droppable>
+                    }
+                </div>
+            </DragDropContext>
         </div>
     )
 }

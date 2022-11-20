@@ -262,6 +262,17 @@
                 display: flex;
                 flex-direction: column;
 
+                .moveContainer {
+                    display: flex;
+                    position: absolute;
+                    z-index: 5;
+                    width: 40px;
+                    height: 40px;
+                    justify-content: center;
+                    align-items: center;
+                    color: #fff;
+                    background-color: rgba(117, 81, 248, 0.477);
+                }
 
                 .actionContauner{
                     display: flex;
@@ -282,17 +293,26 @@
                         position: absolute;
                         // display: flex;
                         flex-direction: column;
+                        gap: 0.2em;
                         top: 2em;
                         left: -1.11em;
             
                         background: #fff;
-                        border-radius: 7px;
+                        // border-radius: 7px;
                         display: none;
             
                         .optionItem {
-                            padding: 0.1em 0.5em;
-                            border-radius: 7px;
+                            padding: 0.3em 0.5em;
+                            font-size: 0.8em;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            text-align: center;
+
                             &:hover{
+                                background-color: #7451f8;
+                                color: #fff;
+                            }
+                            &.active{
                                 background-color: #7451f8;
                                 color: #fff;
                             }

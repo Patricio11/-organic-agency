@@ -1,13 +1,12 @@
 import './single.scss';
 import Sidebar from '../../components/sidebar/Sidebar';
-// import Navbar from '../../components/navbar/Navbar';
-// import Chart from '../../components/chart/Chart';
 
 import PlaceIcon from '@mui/icons-material/Place';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { RiLinksLine,RiDeleteBinLine } from "react-icons/ri"
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import { FaTiktok } from 'react-icons/fa'
@@ -15,8 +14,8 @@ import Portfolio from '../../components/single/portfolio/Portfolio';
 import Polaroids from '../../components/single/polaroids/Polaroids';
 import Videos from '../../components/single/videos/Videos';
 import PhysicalDetails from '../../components/single/physicalDetails/PhysicalDetails';
-// import Actions from '../../components/single/actions/Actions';
-import { /*Link,*/ useLocation } from 'react-router-dom';
+
+import { /*Link,*/ Navigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 // import useFetch from "../../components/hooks/useFetch"
@@ -30,13 +29,14 @@ const fileTypes = ["WEBP","JPEG", "PDF", "M4V", "MP4"];
 
 const Single = () => {
     const location = useLocation();
-
+    
     const talent_id = location.pathname.split('/').pop(); // using pop() funtion to get last element form the split
 
     const [talentData, setTalentData] = useState([]);
 
     const apiImgUrl = process.env.REACT_APP_API_IMG_URL
     const apiUrl = process.env.REACT_APP_API_URL //API main URL
+    const urlDomain = process.env.REACT_APP_API_IMG_URL
 
     useEffect(()=>{
         const axiosInstance = axios.create({
@@ -414,6 +414,16 @@ const Single = () => {
             console.log(err)
         }
     }
+    const handleDeleteTalent = async (id)=>{
+        
+        try {
+            await axios.delete(`${apiUrl}/admin/talents/${id}`)
+            Navigate('/talents')
+            
+        } catch (err) {
+            console.log(err)
+        }
+    }
     return(
         
         <div className="single">
@@ -761,6 +771,21 @@ const Single = () => {
                             <div className="mainCenter mainTop">
                                 
                                 <h1 className="tile">Information</h1>
+                                <div className="singleActions">
+                                <span 
+                                    onClick={()=>{navigator.clipboard.writeText(`${urlDomain}/talent/${talentData._id}`)}}
+                                    className="copyLink iconBtn"
+                                > 
+                                    <RiLinksLine /> 
+                                    <span className='iconText'>Copy Link</span>
+                                </span>
+                                <span 
+                                    onClick={()=>handleDeleteTalent(talentData._id)}
+                                    className="deleteBtn iconBtn"> 
+                                    <RiDeleteBinLine /> 
+                                    <span className='iconText'>Delete</span>
+                                </span>
+                                </div>
                                 <div className="item">
                                     <div className="left">
                                         <div className="imgContainer">

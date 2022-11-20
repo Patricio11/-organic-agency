@@ -46,7 +46,6 @@ const ImgCard = ({handleDeleteMedia,baseMediaUrl, source,sourceId, type, idx}) =
                                 <span 
                                     {...provided.dragHandleProps}
                                 >
-
                                     <FiMove className="imgDeleteBtnGrab"/>
                                 </span>
                             </div>
