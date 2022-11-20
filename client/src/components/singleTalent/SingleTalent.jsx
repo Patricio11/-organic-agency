@@ -1,22 +1,17 @@
 
 import SliderList from "../talents/imageSlider/sliderList/SliderList";
-import useFetch from "../../hooks/useFetch.js"
+// import useFetch from "../../hooks/useFetch.js"
+// import axios from 'axios'
+// import { useState ,useEffect } from "react";
 import "./singleTalent.scss"
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
-const SingleTalent = () => {
-    const location = useLocation();//to get the url main path to be able to get the id
-    const talent_id = location.pathname.split('/').pop(); // using pop() funtion to get last element form the split
- 
-    const apiUrl = process.env.REACT_APP_API_URL //API main URL
-    const apiImgUrl = process.env.REACT_APP_API_IMG_URL //API main URL
-    const {data, loading/*, error*/} = useFetch(
-        `${apiUrl}/talents/find/${talent_id}`
-    )
-    const baseMediaUrlVideos = `${apiImgUrl}/uploads/videos/`
+const SingleTalent = ({data,loading,baseMediaUrlVideos,apiImgUrl}) => {
+    
 
     data.polaroids?.sort((a, b) => b.position - a.position)
     data.videos?.sort((a, b) => b.position - a.position)
+
     return (
         
         <div className="sTalentContainer">

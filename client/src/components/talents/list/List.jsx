@@ -7,19 +7,18 @@ import { useEffect, useState } from "react"
 
 
 const List = () => {
-    const apiUrl = process.env.REACT_APP_API_URL //API main URL
+    // const apiUrl = process.env.REACT_APP_API_URL //API main URL
     const apiImgUrl = process.env.REACT_APP_API_IMG_URL //API main URL
     const [urlToFetch, setUrlToFetch] = useState()
     const {data, loading/*, error*/} = useFetch(urlToFetch)
 
     const [seachTalent, setSeachTalent] = useState('')
     useEffect(()=>{
-        setUrlToFetch(`${apiUrl}/talents/search_result?search=${seachTalent}`)
-    },[seachTalent,apiUrl])
+        setUrlToFetch(`${process.env.REACT_APP_API_URL}/talents/search_result?search=${seachTalent}`)
+    },[seachTalent])
 
     const handleSeach =(e) =>{
         setSeachTalent(e)
-        console.log(seachTalent)
     } 
    
     const location = useLocation();
@@ -30,15 +29,15 @@ const List = () => {
             const urlParams = new URLSearchParams(window.location.search);
     
             urlParams.has('gender') ? 
-                setUrlToFetch(`${apiUrl}/talents/all?gender=${urlParams.get('gender')}`) :
+                setUrlToFetch(`${process.env.REACT_APP_API_URL}/talents/all?gender=${urlParams.get('gender')}`) :
             // urlParams.has('influencers') ?
             //     setUrlToFetch(`${apiUrl}/talents/all?influencers=true`) :
             // urlParams.has('speciality') ?
             //     setUrlToFetch(`${apiUrl}/talents/all?speciality=${urlParams.get('speciality')}`) :
-                setUrlToFetch(`${apiUrl}/talents/featured`)
+                setUrlToFetch(`${process.env.REACT_APP_API_URL}/talents/featured`)
         }
         getTalentByCategories()
-    }, [location, apiUrl]);
+    }, [location]);
     // useEffect(() => {
     //     const urlParams = new URLSearchParams(window.location.search);
 
@@ -70,7 +69,10 @@ const List = () => {
                     <div className="lCardContainer">
                         {
                             data.map((talent) => (
-                                <Link to={`/talents/${talent._id}`} key={talent._id}>
+                                // <a href={`https://organictalentmanagement.co.za/talents/${talent._id}`}>
+                                //     <Card singleCardTalent={talent} apiImgUrl={apiImgUrl}/>
+                                // </a>
+                                <Link to={`/talent/${talent._id}`} key={talent._id}>
                                     <Card singleCardTalent={talent} apiImgUrl={apiImgUrl}/>
                                 </Link>
                             ))

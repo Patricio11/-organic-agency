@@ -17,28 +17,34 @@ function App() {
               element={<Home />}
             ></Route>
           </Route>
-          <Route path="talents">
+          <Route path="/talents">
             <Route
               index
               element={<Talents />}
             ></Route>
-       
             <Route 
               path="all"
               element={<Talents />}
             ></Route>
-            <Route 
+
+            {/* <Route
               path=":talentId"
               element={<Talent />}
-            ></Route>
+            ></Route> */}
+
+            
           </Route>
-          <Route path="about">
+          <Route 
+            path="/talent/:talentId"
+            element={<Talent />}
+          ></Route>
+          <Route path="/about">
             <Route
               index
               element={<About />}
             ></Route>
           </Route>
-          <Route path="contact">
+          <Route path="/contact">
             <Route
               index
               element={<Contact />}

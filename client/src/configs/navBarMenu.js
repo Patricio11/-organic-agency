@@ -20,7 +20,8 @@ export const menuData = [
     //     text: 'Influencers'
     // },
     {
-        link: '/talents/all',
+        link: '/talents',
+        // link: '/talents/all',
         section: 'talents',
         text: 'All'
     },

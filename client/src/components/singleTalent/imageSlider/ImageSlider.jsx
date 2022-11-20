@@ -18,10 +18,6 @@ const ImageSlider = ({slideNumber, setSlideNumber, photos, baseMediaUrlPortfolio
         setSlideNumber(newSildeNumber);
     }
 
-    console.log('The Array of photos');
-    console.log(photos);
-    console.log('The slider  NUmber');
-    console.log(slideNumber);
 
     return (
         <div className="imageSlider">

@@ -49,7 +49,12 @@ const Home = () => {
                             <Link to="/contact" className="cIcon">
                                 <PhoneEnabledOutlinedIcon />
                             </Link>
-                            <a href="https://www.instagram.com/patriciopcm11" target="_blank" rel="noreferrer" className="cIcon">
+                            <a 
+                                href="https://instagram.com/organictalentmanagement?igshid=YmMyMTA2M2Y=" 
+                                target="_blank" 
+                                rel="noreferrer" 
+                                className="cIcon"
+                            >
                                 <InstagramIcon />
                             </a>
                         </div>
