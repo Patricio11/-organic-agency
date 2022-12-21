@@ -272,6 +272,10 @@
                     align-items: center;
                     color: #fff;
                     background-color: rgba(117, 81, 248, 0.477);
+
+                    &.inactive{
+                        pointer-events: none;
+                    }
                 }
 
                 .actionContauner{

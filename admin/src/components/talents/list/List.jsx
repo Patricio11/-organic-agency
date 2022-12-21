@@ -186,17 +186,20 @@ const List = () => {
     }
 
     //SORT FEATURED TALENTS
-    const handleUpdateTalentPosition = async (mediaFileList) => {
+    const handleUpdateTalentPosition = async (talentListNewOrder) => {
 
+        
         try {
             const talentListOrder = {
-                talentList: mediaFileList,
+                talentList: talentListNewOrder,
             }
-           
-            const updateFilesPosition = await axios.put(`${apiUrl}/talents/featuredPosition`, talentListOrder);
+            console.log(talentListOrder)
+            const axiosInstance = axios.create({
+                baseURL: process.env.REACT_APP_API_URL
+            })
+            const updateFilesPosition = await axiosInstance.put(`/talents/featuredPosition`, talentListOrder);
 
-            getTalents(updateFilesPosition.data)
-
+            setGetTalents(updateFilesPosition.data)
         } catch (err) {
             console.log(err)
         }
@@ -210,10 +213,14 @@ const List = () => {
         const [removed] = newList.splice(source.index, 1)
         newList.splice(destination.index, 0, removed)
 
-        console.log(newList)
+        
         handleUpdateTalentPosition(newList)
     }
     
+    
+    if(searchCategory === 'featured'){
+        getTalents?.sort((a, b) => b.position - a.position)   
+    }
     return (
         <div className="list">
             {
@@ -395,18 +402,13 @@ const List = () => {
                                                                 {...provided.draggableProps}
                                                                 className="talentCardContainer" 
                                                             >
-                                                                {
-                                                                    searchCategory === 'featured' ?
-                                                                    <div className="moveContainer">
-                                                                        <span 
-                                                                            {...provided.dragHandleProps}
-                                                                        >
-                                                                            <FiMove className="imgDeleteBtnGrab"/>
-                                                                        </span>
-                                                                    </div>
-                                                                    : null
-                                                                }
-                                                                
+                                                                <div className={searchCategory !== 'featured' ? 'moveContainer inactive' : 'moveContainer'}>
+                                                                    <span 
+                                                                        {...provided.dragHandleProps}
+                                                                    >
+                                                                        <FiMove className="imgDeleteBtnGrab"/>
+                                                                    </span>
+                                                                </div>
                                                                 
                                                                 <div className="actionContauner">
                                                                     <MoreVertIcon className="actionIcon" />

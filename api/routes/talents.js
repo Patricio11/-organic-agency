@@ -20,7 +20,8 @@ const {
     updateTalentSocialMedia, 
     videosFileUpload,
     updateTalentJobHistory,
-    updateTalentFilesPosition
+    updateTalentFilesPosition,
+    updateTalentsPosition
 } = require("../controllers/talent.js");
 // import { verifyAdmin, verifyUser } from "../utils/verifyAdmin.js";
 
@@ -127,6 +128,8 @@ router.post("/upload/documents", uploadDocuments.array('documents'), documentsFi
 //SECONDARY ROUTES
 //FEARURED
 router.get("/featured", getFeatureds)
+router.put("/featuredPosition", updateTalentsPosition)
+
 router.get("/all", getTalentByGender)
 // router.get("/speciality", getTalentBySpeciality)
 router.get("/search_result", seachTalent)

@@ -15,7 +15,7 @@ import Polaroids from '../../components/single/polaroids/Polaroids';
 import Videos from '../../components/single/videos/Videos';
 import PhysicalDetails from '../../components/single/physicalDetails/PhysicalDetails';
 
-import { /*Link,*/ Navigate, useLocation } from 'react-router-dom';
+import { /*Link,*/ useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 // import useFetch from "../../components/hooks/useFetch"
@@ -30,13 +30,13 @@ const fileTypes = ["WEBP","JPEG", "PDF", "M4V", "MP4"];
 const Single = () => {
     const location = useLocation();
     
+    const navigate = useNavigate()
     const talent_id = location.pathname.split('/').pop(); // using pop() funtion to get last element form the split
 
     const [talentData, setTalentData] = useState([]);
-
     const apiImgUrl = process.env.REACT_APP_API_IMG_URL
     const apiUrl = process.env.REACT_APP_API_URL //API main URL
-    const urlDomain = process.env.REACT_APP_API_IMG_URL
+    const urlDomain = 'https://organictalentmanagement.co.za'
 
     useEffect(()=>{
         const axiosInstance = axios.create({
@@ -418,7 +418,7 @@ const Single = () => {
         
         try {
             await axios.delete(`${apiUrl}/admin/talents/${id}`)
-            Navigate('/talents')
+            navigate('/talents')
             
         } catch (err) {
             console.log(err)

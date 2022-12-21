@@ -50,6 +50,7 @@ const List = () => {
     //         setUrlToFetch(`${apiUrl}/talents/featured`)
     // }, [location, apiUrl]);
 
+    data?.sort((a, b) => b.position - a.position)
     return (
         <div className="list">
             <div className="searchTalent">

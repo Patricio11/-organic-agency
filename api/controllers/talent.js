@@ -290,13 +290,26 @@ exports.getTalent = async (req, res, next) =>{
         next(err)//to go execute the error midleware
     }
 }
+// exports.getSingleTalent = async (req, res, next) =>{
+//     const { id } = req.params;
+//     console.log('id')
+//     console.log(id)
+//     try {
+//         const talent = await Talent.findById(id);
+//         console.log('talent')
+//         console.log(talent)
+//         res.status(201).json(talent);
+//     } catch (err) {
+//         next(err)//to go execute the error midleware
+//     }
+// }
 
 //GET ALL TALENTS
 exports.getAllTalents = async (req, res, next)=>{
    
     try {
         const allTalents = await Talent.find({})
-        console.log(allTalents);
+        // console.log(allTalents);
         res.status(201).json(allTalents);
     } catch (error) {
         next(err);
@@ -342,6 +355,27 @@ exports.getFeatureds = async (req, res, next)=>{
     } catch (error) {
         next(err);
     }
+}
+exports.updateTalentsPosition = async (req, res, next)=>{
+    const { talentList } = req.body
+
+    try {
+        
+        for(const key in talentList.reverse()){
+            const singleTalent = talentList[key]
+    
+            await Talent.findByIdAndUpdate(
+                {_id: singleTalent._id},
+                {
+                    $set: {position: key}
+                }
+            )
+        }
+    } catch (error) {
+        console.log(error)
+    }
+    const upTalent = await Talent.find({ featured: true })
+    res.status(201).json(upTalent);
 }
 //GET TALENTS gender
 exports.getTalentByGender = async (req, res, next)=>{
