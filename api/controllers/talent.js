@@ -1,6 +1,7 @@
 const Talent = require("../models/Talent");
 const fs = require("fs");
 const path = require("path")//importing to create the path for the files
+const nodemailer = require('nodemailer')
 
 
 exports.prifileUpload =  (req, res, next) =>{
@@ -526,4 +527,42 @@ exports.seachTalent = async (req, res, next) =>{
     
 
    
+}
+
+// SEND CONTACT FORM EMAIL
+exports.talentEmailNotification = async (req, res) => {
+    const { talentId } = req.body
+    const { roleId } = req.params
+
+    // CONFIG THE EMAIL SERVER
+    const transport = nodemailer.createTransport({
+        host: process.env.MAIL_HOST,
+        port: process.env.MAIL_PORT,
+        auth: {
+            user: process.env.MAIL_USERNAME,
+            pass: process.env.MAIL_PASS
+        }
+    })
+
+    try{
+
+        const talent = await Talent.findById(talentId)
+        const role = await Role.findById(roleId)
+
+        await transport.sendMail({
+            from: process.env.MAIL_FROM,
+            to: "patricio.cristo@hotmail.com",
+            subject: "Talent Notification",
+            html: `
+            <h1>Here is your email</h1>
+            <h2>Hi ${talent.name}</h2>
+            <h1>You were added to ${role.title} Role</h1>
+            `
+        })
+
+        res.status(201).json('Email Send Pretty well hahaha')
+    }catch(err){
+        res.status(201).json(err)
+    }
+    
 }

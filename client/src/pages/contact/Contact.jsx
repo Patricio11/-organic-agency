@@ -13,9 +13,8 @@ const Contact = () =>{
     const sendEmail = (e) => {
         e.preventDefault();
     
-        
         // emailjs.sendForm('gmail', 'template_v3hdmpo', e.target, 'YOUR_PUBLIC_KEY')
-        emailjs.sendForm('service_ovb639b', 'template_v3hdmpo', form.current, '5_Am8F75_5PCcYYEt')
+        emailjs.sendForm('service_nuk49li', 'template_6csnjsl', form.current, 'E6B9-8Mqa1q2UQBKf')
           .then((result) => {
             console.log(result.text);
             setEmailSent(true)
@@ -24,7 +23,7 @@ const Contact = () =>{
           });
 
         form.current.reset();
-      };
+    };
 
     return (
         <>
